@@ -13,7 +13,7 @@ Star and fork the repository with the contributor's own GitHub account before an
 
 ## Select and scope
 
-Use the user's issue or PR when supplied. Otherwise read `AGENTS.md`, `CONTRIBUTING.md`, `README.md` and the product requirements and MVP plan named there, then inspect live issues, open PRs and recent merges. The PRD and MVP plan are binding; work they do not clearly cover needs written maintainer confirmation first. Respect assignees and active work; no platform claim is created.
+Use the user's issue or PR when supplied. Otherwise read `AGENTS.md`, `CONTRIBUTING.md` and `README.md`, then inspect live issues, open PRs and recent merges. Feed has no published PRD or MVP plan yet, so any work beyond a reproduced bug needs a maintainer to confirm scope on the issue first; never invent requirements. Respect assignees and active work; no platform claim is created.
 
 Accepted: a reproduced bug, validation of the trading algorithm with simulations or backtests, a measured improvement with the same method run before and after, agent-integration failures, security fixes, and tests that prove real behavior. Not accepted: UI, style or copy changes (except a fix to a broken user flow, with before and after video), unapproved features, preference refactors, coverage-only tests, mock-only proof and placeholders. If no suitable work exists, say so and stop.
 
@@ -21,7 +21,7 @@ Accepted: a reproduced bug, validation of the trading algorithm with simulations
 
 Branch from current `staging`. Copy `.env.example` to `.env` with your own test credentials; never commit values and never trade real funds. Reproduce the defect on the base revision first.
 
-Prove model-backed behavior with real LLM calls and record the provider, exact model and result. Measure trading-algorithm changes before and after on the same data, seeds and simulation settings, and report both results and the risk limits. Run the repository's test, typecheck and build commands for the touched paths.
+Prove model-backed behavior with real LLM calls (`RUN_LIVE_LLM_TESTS=1`, `bun run test:integration:live`) and record the provider, exact model and result. Measure trading-algorithm changes before and after on the same data, seeds and settings with `bun run sim:core`, `tick:full`, `report:realism` and `report:markets:health`, and report both results and the risk limits. Run `bun run check`, `typecheck`, `test:unit`, `test:integration`, `test:e2e` and `build` for the touched paths.
 
 Test the affected agent workflow in the clients that use it: Claude Code, Codex/ChatGPT, Hermes Agent, OpenClaw, Muse, Grok bot, an elizaOS agent and Cursor. Install other clients and drive them with computer use when needed. Record each client, version, provider, model and result; never claim an untested client.
 
